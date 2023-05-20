@@ -55,3 +55,18 @@ tasks.withType(Test) {
 test {
     useJUnitPlatform()
 }
+task CardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("Card")
+    }
+}
+task ListTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("List")
+    }
+}
+task BoardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("Board")
+    }
+}

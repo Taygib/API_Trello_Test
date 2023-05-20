@@ -5,5 +5,7 @@ import lombok.Data;
 @Data
 public class CreateTestCaseBody {
     String name;
+    String idList;
+
 
 }

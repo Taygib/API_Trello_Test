@@ -1,6 +1,7 @@
 package test;
 
 import com.github.javafaker.Faker;
+import io.restassured.response.Response;
 import models.CreateTestCaseBody;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ import static io.restassured.http.ContentType.JSON;
 public class TrelloTestBoard {
 
     static String token = "645c12a850d5fdbf2f1fbd5b%2FATTS52lJuzlkEGT1RkP4JzEDGTTwcDkEPoT0YTxkjMzOUQasV9hX5ADToCAflCSes3ocB891E9DA";
-    static String idBoard = "64612406edf72d6ce340e57c";
+    static String idBoard = "645c13607c2dc8c246aa821d";
 
     @Test
     void createBoard() {
@@ -24,6 +25,19 @@ public class TrelloTestBoard {
 
         CreateTestCaseBody testCaseBody = new CreateTestCaseBody();
         testCaseBody.setName(testCaseName);
+
+        Response response =
+                given()
+                        .cookie("token", token)
+                        .filter(withCustomTemplates())
+                        .get("https://trello.com/1/board/" + idBoard + "/lists")
+                        .then()
+                        .statusCode(200)
+                        .extract()
+                        .response();
+        String id = response.path("id[0]");
+        String name = response.path("name[0]");
+        System.out.println(id + "\n" + name);
 
         step("Создать доску", () ->
                 given()
@@ -46,7 +60,7 @@ public class TrelloTestBoard {
                 given()
                         .cookie("token", token)
                         .filter(withCustomTemplates())
-                        .get("https://trello.com/1/boards/" + idBoard)
+                        .get("https://trello.com/1/boards/" )
                         .then()
                         .log().body()
                         .log().status()
@@ -57,11 +71,8 @@ public class TrelloTestBoard {
     @Test
     void changeName() {
 
-        Faker faker = new Faker();
-        String testCaseName = faker.name().title();
 
-        CreateTestCaseBody testCaseBody = new CreateTestCaseBody();
-        testCaseBody.setName(testCaseName);
+
 
         step("Изменить название", () ->
                 given()
@@ -70,7 +81,7 @@ public class TrelloTestBoard {
                         .cookie("token", token)
                         .filter(withCustomTemplates())
                         .contentType("application/json;charset=UTF-8")
-                        .body(testCaseBody)
+                        .body("{\n" + " \"name\": \"Доска\"\n" + "}")
                         .put("https://trello.com/1/boards/" + idBoard)
                         .then()
                         .log().body()
