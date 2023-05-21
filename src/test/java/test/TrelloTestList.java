@@ -96,7 +96,6 @@ public class TrelloTestList {
                         .statusCode(200));
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Test
     @Tag("Card")
@@ -139,6 +138,7 @@ public class TrelloTestList {
     @Test
     @Tag("Card")
     @Tag("Board")
+    @Tag("deleteCard")
     void deleteCardInList() {
 
         Response response =

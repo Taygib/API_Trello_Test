@@ -70,3 +70,8 @@ task BoardTest(type: Test) {
         includeTags("Board")
     }
 }
+task DeleteCardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("deleteCard")
+    }
+}
