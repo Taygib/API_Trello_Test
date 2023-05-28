@@ -1,50 +1,42 @@
 package test;
 
-import com.github.javafaker.Faker;
 import io.restassured.response.Response;
-import models.CreateTestCaseBody;
+import models.CreateAndDeleteName;
 import models.PutRenameList;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static helpers.CustomAllureListener.withCustomTemplates;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
-import static org.apache.commons.lang3.ClassUtils.getName;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.hamcrest.Matchers.*;
+import static specs.SpecCheckList.requestCheckList;
+import static specs.SpecCheckList.responseCheckList;
+import static specs.SpecCreateCard.*;
+import static specs.SpecCreateLists.requestCreateLists;
+import static specs.SpecCreateLists.responseCreateLists;
+import static specs.SpecCreateNewCard.*;
+import static specs.SpecDeleteCardInList.*;
+import static specs.SpecRenameList.*;
 
-public class TrelloTestList {
-
-    static String token = "645c12a850d5fdbf2f1fbd5b%2FATTS52lJuzlkEGT1RkP4JzEDGTTwcDkEPoT0YTxkjMzOUQasV9hX5ADToCAflCSes3ocB891E9DA";
-    static String idBoard = "645c13607c2dc8c246aa821d";
+public class TrelloTestList extends TestBase {
 
     @Test
     @Tag("List")
     @Tag("Board")
     void createLists() {
 
-        Faker faker = new Faker();
         String testCaseName = faker.name().title();
 
         PutRenameList testCaseBody = new PutRenameList();
         testCaseBody.setName(testCaseName);
 
         step("Создать список", () ->
-                given()
-                        .log().uri()
-                        .contentType(JSON)
+                given(requestCreateLists)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
-                        .contentType("application/json;charset=UTF-8")
                         .body(testCaseBody)
-                        .post("https://trello.com/1/board/" + idBoard + "/lists")
+                        .post(idBoard + "/lists")
                         .then()
-                        .log().body()
-                        .log().status()
-                        .statusCode(200))
+                        .spec(responseCreateLists))
                 .body("name", is(testCaseBody.getName()));
     }
 
@@ -53,35 +45,28 @@ public class TrelloTestList {
     @Tag("List")
     void renameList() {
 
-        Response response =
+        Response rename =
                 step("ID для переименования списка", () ->
-                        given()
+                        given(requestResponseRenameList)
                                 .cookie("token", token)
-                                .filter(withCustomTemplates())
-                                .get("https://trello.com/1/board/" + idBoard + "/lists")
+                                .get(idBoard + "/lists")
                                 .then()
-                                .statusCode(200)
+                                .spec(responseResponseRenameList)
                                 .extract()
                                 .response());
-        String id = response.path("id[0]");
+        String id = rename.path("id[0]");
 
         PutRenameList renameList = new PutRenameList();
         renameList.setName("Communications Developer");
 
         step("Переименовать список", () ->
-                given()
-                        .log().uri()
-                        .contentType(JSON)
+                given(requestRenameList)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
-                        .contentType("application/json;charset=UTF-8")
                         .body(renameList)
                         .when()
-                        .put("https://trello.com/1/lists/" + id)
+                        .put(id)
                         .then()
-                        .log().body()
-                        .log().status()
-                        .statusCode(200))
+                        .spec(responseRenameList))
                 .body("name", is("Communications Developer"));
     }
 
@@ -91,14 +76,11 @@ public class TrelloTestList {
     void checkList() {
 
         step("Проверить список", () ->
-                given()
+                given(requestCheckList)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
-                        .get("https://trello.com/1/board/" + idBoard + "/lists")
+                        .get(idBoard + "/lists")
                         .then()
-                        .log().body()
-                        .log().status()
-                        .statusCode(200));
+                        .spec(responseCheckList));
     }
 
     @Test
@@ -106,38 +88,30 @@ public class TrelloTestList {
     @Tag("Board")
     void createCard() {
 
-        Response response =
+        Response forCreate =
                 step("idList для создания карточки", () ->
-                        given()
+                        given(requestResponseCreateCard)
                                 .cookie("token", token)
-                                .filter(withCustomTemplates())
-                                .get("https://trello.com/1/board/" + idBoard + "/lists")
+                                .get(idBoard + "/lists")
                                 .then()
-                                .statusCode(200)
+                                .spec(responseResponseCreateCard)
                                 .extract()
                                 .response());
-        String idList = response.path("id[0]");
+        String idList = forCreate.path("id[0]");
 
-        Faker faker = new Faker();
         String testCaseName = faker.name().title();
 
-        CreateTestCaseBody testCaseBody = new CreateTestCaseBody();
+        CreateAndDeleteName testCaseBody = new CreateAndDeleteName();
         testCaseBody.setName(testCaseName);
         testCaseBody.setIdList(idList);
 
         step("Создать карточку", () ->
-                given()
-                        .log().uri()
-                        .contentType(JSON)
+                given(requestCreateCard)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
-                        .contentType("application/json;charset=UTF-8")
                         .body(testCaseBody)
-                        .post("https://trello.com/1/cards")
+                        .post("/1/cards")
                         .then()
-                        .log().body()
-                        .log().status()
-                        .statusCode(200))
+                        .spec(responseCreateCard))
                 .body("idList", is(idList));
     }
 
@@ -147,43 +121,40 @@ public class TrelloTestList {
     @Tag("deleteCard")
     void deleteCardInList() {
 
-        Response response =
+        Response forIdList =
                 step("idList для карточки", () ->
-                        given()
+                        given(requestResponseForIdList)
                                 .cookie("token", token)
-                                .filter(withCustomTemplates())
-                                .get("https://trello.com/1/board/" + idBoard + "/lists")
+                                .get(idBoard + "/lists")
                                 .then()
-                                .statusCode(200)
+                                .spec(responseResponseForIdList)
                                 .extract()
                                 .response());
-        String idList = response.path("id[0]");
+        String idList = forIdList.path("id[0]");
 
-        Response responseNext =
+        Response forIdCard =
                 step("idCard для удаления карточки", () ->
-                        given()
+                        given(requestResponseForIdCard)
                                 .cookie("token", token)
-                                .filter(withCustomTemplates())
-                                .get("https://trello.com/1/lists/" + idList + "/cards")
+                                .get(idList + "/cards")
                                 .then()
-                                .statusCode(200)
+                                .spec(responseResponseForIdCard)
                                 .extract()
                                 .response());
-        String idCard = responseNext.path("id[0]");
+        String idCard = forIdCard.path("id[0]");
 
-        CreateTestCaseBody testCaseBody = new CreateTestCaseBody();
+        CreateAndDeleteName testCaseBody = new CreateAndDeleteName();
         testCaseBody.setIdList(idList);
 
         step("Удалить карточку", () ->
-                given()
+                given(requestDeleteCardInList)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
                         .body(testCaseBody)
-                        .delete("https://trello.com/1/cards/" + idCard)
+                        .delete(idCard)
                         .then()
                         .log().body()
                         .log().status()
-                        .statusCode(200));
+                        .spec(responseDeleteCardInList));
     }
 
     @Test
@@ -191,38 +162,30 @@ public class TrelloTestList {
     @Tag("Board")
     void createNewCard() {
 
-        Response response =
+        Response forIdList =
                 step("idList для создания карточки", () ->
-                        given()
+                        given(requestResponseCreateNewCard)
                                 .cookie("token", token)
-                                .filter(withCustomTemplates())
-                                .get("https://trello.com/1/board/" + idBoard + "/lists")
+                                .get(idBoard + "/lists")
                                 .then()
-                                .statusCode(200)
+                                .spec(responseResponseCreateNewCard)
                                 .extract()
                                 .response());
-        String idList = response.path("id[0]");
+        String idList = forIdList.path("id[0]");
 
-        Faker faker = new Faker();
         String testCaseName = faker.name().title();
 
-        CreateTestCaseBody testCaseBody = new CreateTestCaseBody();
+        CreateAndDeleteName testCaseBody = new CreateAndDeleteName();
         testCaseBody.setName(testCaseName);
         testCaseBody.setIdList(idList);
 
         step("Создать NewКарточку", () ->
-                given()
-                        .log().uri()
-                        .contentType(JSON)
+                given(requestCreateNewCard)
                         .cookie("token", token)
-                        .filter(withCustomTemplates())
-                        .contentType("application/json;charset=UTF-8")
                         .body(testCaseBody)
-                        .post("https://trello.com/1/cards")
+                        .post("/1/cards")
                         .then()
-                        .log().body()
-                        .log().status()
-                        .statusCode(200))
+                        .spec(responseCreateNewCard))
                 .body("idList", is(idList));
     }
 }
