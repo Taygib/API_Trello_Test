@@ -23,6 +23,84 @@
 |:-------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
 
 <h2> <img width="5%" title="Telegram" src="materials/pictures/Telegram.png"> Уведомление в Telegram</h2>
-Telegram<img  src="materials/screens/Telegram.png?raw=true">                                                                        | 
+<img width="2.5%" title="Telegram" src="materials/pictures/Telegram.png"> Telegram<img  src="materials/screens/Telegram.png?raw=true">                                                                         
 
+### <img width="6%" title="Gradle" src="materials/pictures/Gradle.png"> Gradle
+```
+plugins {
+    id 'java-library'
+    id "io.freefair.lombok" version "6.0.0-m2"
+    id 'io.qameta.allure' version '2.11.2'
+}
+allure {
+    report {
+        version.set("2.21.0")
+    }
+    adapter { // отвечает за появление папки build/allure-results
+        aspectjWeaver.set(true) //обработка аннотации @Step
+        frameworks {
+            junit5 { //название фреймворка
+                adapterVersion.set("2.21.0") //версия интеграции фреймворка и Allure
+            }
+        }
+    }
+}
 
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:5.9.1",
+            "org.slf4j:slf4j-simple:2.0.6",
+            "io.rest-assured:rest-assured:5.3.0",
+            "com.fasterxml.jackson.core:jackson-databind:2.14.2",
+            "org.assertj:assertj-core:3.24.2",
+            "com.github.javafaker:javafaker:1.0.2",
+            "io.rest-assured:json-path:5.3.0",
+            "io.qameta.allure:allure-rest-assured:2.21.0"
+    )
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+test {
+    useJUnitPlatform()
+}
+task CardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("Card")
+    }
+}
+task ListTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("List")
+    }
+}
+task BoardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("Board")
+    }
+}
+task DeleteCardTest(type: Test) {
+    useJUnitPlatform() {
+        includeTags("deleteCard")
+    }
+}
+```
