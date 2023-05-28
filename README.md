@@ -23,7 +23,7 @@
 |:-------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
 
 <h2> <img width="5%" title="Telegram" src="materials/pictures/Telegram.png"> Уведомление в Telegram</h2>
-<img width="2.5%" title="Telegram" src="materials/pictures/Telegram.png">Telegram
+
 <img  src="materials/screens/Telegram.png?raw=true">                                                                         
 
 ### <img width="6%" title="Gradle" src="materials/pictures/Gradle.png"> Gradle
