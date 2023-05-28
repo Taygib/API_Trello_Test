@@ -67,7 +67,7 @@ public class TrelloTestList extends TestBase {
                         .put(id)
                         .then()
                         .spec(responseRenameList))
-                .body("name", is("Communications Developer"));
+                .body("name", equalTo("Communications Developer"));
     }
 
     @Test
