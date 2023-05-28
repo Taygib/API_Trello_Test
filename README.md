@@ -16,7 +16,7 @@
 <img width="70%" title="Jenkins Build" src="materials/screens/запуск в Jenkins.png">
  </p>
 
- ##  Результат тестирования [Allure Reports](https://jenkins.autotests.cloud/job/TrelloTest/) 
+ ## <img width="5%" title="Allure Report" src="materials/pictures/Allure Report.png" > Результат тестирования [Allure Reports](https://jenkins.autotests.cloud/job/TrelloTest/) 
 
 
 |        <img width="5%" title="Allure Report" src="materials/pictures/Allure Report.png" > Allure <img src="materials/screens/Allure1.png?raw=true">        | <img width="5%" title="Allure Report" src="materials/pictures/Allure Report.png" > Allure<img src="materials/screens/Allure2.png?raw=true"> |
@@ -27,7 +27,7 @@
 <img  src="materials/screens/Telegram.png?raw=true">  
 </p>
 
-### <img width="6%" title="Gradle" src="materials/pictures/Gradle.png"> Gradle
+### <img width="5%" title="Gradle" src="materials/pictures/Gradle.png"> Gradle
 ```
 plugins {
     id 'java-library'
