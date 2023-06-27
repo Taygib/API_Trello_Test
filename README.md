@@ -1,5 +1,8 @@
 #   Тестирование API для Trello 
 
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%2336BCF7&lines=Документация+API+Trello)](https://developer.atlassian.com/cloud/trello/rest/api-group-actions/#api-group-actions)
+
+
 <h2>  Cтек </h2>
 <p align="center">
   <img width="6%" title="IDEA" src="materials/pictures/IDEA.png">
