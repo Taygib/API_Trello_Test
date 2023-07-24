@@ -21,7 +21,7 @@
 - *удалить список*
 - *Создать новую карточку*
 
-## <img width="5%" title="Jenkins" src="materials/pictures/Jenkins.png"> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/Students/job/TrelloTest/)
+## <img width="5%" title="Jenkins" src="materials/pictures/Jenkins.png"> Сборка в [Jenkins](https://jenkins.autotests.cloud/job/Students/job/TrelloTest/) :gear:
 <p align="center">
 <img width="70%" title="Jenkins Build" src="materials/screens/запуск в Jenkins.png">
  </p>
@@ -44,7 +44,7 @@ ${TASK}
 |:-------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
 
 <p align="center">
-<img width="5%" title="Telegram" src="materials/pictures/Telegram.png"> Telegram
+<img width="3%" title="Telegram" src="materials/pictures/Telegram.png"> Telegram
 </p>
 
 <p align="center">
