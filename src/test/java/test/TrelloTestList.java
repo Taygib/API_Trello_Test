@@ -1,24 +1,35 @@
 package test;
 
+import com.github.javafaker.Faker;
+import config.DriverConfig;
 import io.restassured.response.Response;
 import models.CreateAndDeleteName;
 import models.PutRenameList;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static specs.SpecCheckList.requestCheckList;
-import static specs.SpecCheckList.responseCheckList;
-import static specs.SpecCreateCard.*;
-import static specs.SpecCreateLists.requestCreateLists;
-import static specs.SpecCreateLists.responseCreateLists;
-import static specs.SpecCreateNewCard.*;
-import static specs.SpecDeleteCardInList.*;
-import static specs.SpecRenameList.*;
+import static specs.CheckListSpec.requestCheckList;
+import static specs.CheckListSpec.responseCheckListStatus200;
+import static specs.CreateCardSpec.*;
+import static specs.CreateListsSpec.requestCreateLists;
+import static specs.CreateListsSpec.responseCreateLists;
+import static specs.CreateNewCardSpec.*;
+import static specs.DeleteCardInListSpec.*;
+import static specs.RenameListSpec.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class TrelloTestList extends TestBase {
+
+public class TrelloTestList {
+    Faker faker = new Faker();
+    private final DriverConfig config;
+
+    public TrelloTestList() {
+        this.config = ConfigFactory.create(DriverConfig.class, System.getProperties());
+    }
 
     @Test
     @Tag("List")
@@ -32,9 +43,9 @@ public class TrelloTestList extends TestBase {
 
         step("Создать список", () ->
                 given(requestCreateLists)
-                        .cookie("token", token)
+                        .cookie("token", config.token())
                         .body(testCaseBody)
-                        .post(idBoard + "/lists")
+                        .post(config.idBoard() + "/lists")
                         .then()
                         .spec(responseCreateLists))
                 .body("name", is(testCaseBody.getName()));
@@ -48,8 +59,8 @@ public class TrelloTestList extends TestBase {
         Response rename =
                 step("ID для переименования списка", () ->
                         given(requestResponseRenameList)
-                                .cookie("token", token)
-                                .get(idBoard + "/lists")
+                                .cookie("token", config.token())
+                                .get(config.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseRenameList)
                                 .extract()
@@ -61,13 +72,17 @@ public class TrelloTestList extends TestBase {
 
         step("Переименовать список", () ->
                 given(requestRenameList)
-                        .cookie("token", token)
+                        .cookie("token", config.token())
                         .body(renameList)
                         .when()
                         .put(id)
                         .then()
                         .spec(responseRenameList))
                 .body("name", equalTo("Communications Developer"));
+
+        step("Проверка переименовании", () ->{
+            assertThat(renameList.getName()).isEqualTo("Communications Developer");
+        });
     }
 
     @Test
@@ -77,10 +92,10 @@ public class TrelloTestList extends TestBase {
 
         step("Проверить список", () ->
                 given(requestCheckList)
-                        .cookie("token", token)
-                        .get(idBoard + "/lists")
+                        .cookie("token", config.token())
+                        .get(config.idBoard() + "/lists")
                         .then()
-                        .spec(responseCheckList));
+                        .spec(responseCheckListStatus200));
     }
 
     @Test
@@ -91,8 +106,8 @@ public class TrelloTestList extends TestBase {
         Response forCreate =
                 step("idList для создания карточки", () ->
                         given(requestResponseCreateCard)
-                                .cookie("token", token)
-                                .get(idBoard + "/lists")
+                                .cookie("token", config.token())
+                                .get(config.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseCreateCard)
                                 .extract()
@@ -107,7 +122,7 @@ public class TrelloTestList extends TestBase {
 
         step("Создать карточку", () ->
                 given(requestCreateCard)
-                        .cookie("token", token)
+                        .cookie("token", config.token())
                         .body(testCaseBody)
                         .post("/1/cards")
                         .then()
@@ -124,8 +139,8 @@ public class TrelloTestList extends TestBase {
         Response forIdList =
                 step("idList для карточки", () ->
                         given(requestResponseForIdList)
-                                .cookie("token", token)
-                                .get(idBoard + "/lists")
+                                .cookie("token", config.token())
+                                .get(config.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseForIdList)
                                 .extract()
@@ -135,7 +150,7 @@ public class TrelloTestList extends TestBase {
         Response forIdCard =
                 step("idCard для удаления карточки", () ->
                         given(requestResponseForIdCard)
-                                .cookie("token", token)
+                                .cookie("token", config.token())
                                 .get(idList + "/cards")
                                 .then()
                                 .spec(responseResponseForIdCard)
@@ -148,13 +163,13 @@ public class TrelloTestList extends TestBase {
 
         step("Удалить карточку", () ->
                 given(requestDeleteCardInList)
-                        .cookie("token", token)
+                        .cookie("token", config.token())
                         .body(testCaseBody)
                         .delete(idCard)
                         .then()
                         .log().body()
                         .log().status()
-                        .spec(responseDeleteCardInList));
+                        .spec(responseDeleteCardInListStatus200));
     }
 
     @Test
@@ -165,8 +180,8 @@ public class TrelloTestList extends TestBase {
         Response forIdList =
                 step("idList для создания карточки", () ->
                         given(requestResponseCreateNewCard)
-                                .cookie("token", token)
-                                .get(idBoard + "/lists")
+                                .cookie("token", config.token())
+                                .get(config.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseCreateNewCard)
                                 .extract()
@@ -179,9 +194,9 @@ public class TrelloTestList extends TestBase {
         testCaseBody.setName(testCaseName);
         testCaseBody.setIdList(idList);
 
-        step("Создать NewКарточку", () ->
+        step("Создать New Карточку", () ->
                 given(requestCreateNewCard)
-                        .cookie("token", token)
+                        .cookie("token", config.token())
                         .body(testCaseBody)
                         .post("/1/cards")
                         .then()
