@@ -66,18 +66,18 @@ public class TrelloTestList {
         PutRenameList renameList = new PutRenameList();
         renameList.setName("Communications Developer");
 
-        step("Переименовать список", () ->
+        PutRenameList response = step("Переименовать список", () ->
                 given(requestRenameList)
                         .cookie("token", config.token())
                         .body(renameList)
                         .when()
                         .put(id)
                         .then()
-                        .spec(responseRenameList))
-                .body("name", equalTo("Communications Developer"));
+                        .spec(responseRenameList)
+                .extract().as(PutRenameList.class));
 
         step("Проверка переименовании", () ->{
-            assertThat(renameList.getName()).isEqualTo("Communications Developer");
+            assertThat(response.getName()).isEqualTo("Communications Developer");
         });
     }
 
