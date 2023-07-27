@@ -25,11 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrelloTestList {
     Faker faker = new Faker();
-    private final TrelloConfig config;
-
-    public TrelloTestList() {
-        this.config = ConfigFactory.create(TrelloConfig.class, System.getProperties());
-    }
+    private static TrelloConfig config = ConfigFactory.create(TrelloConfig.class, System.getProperties());
 
     @Test
     @Tag("List")
