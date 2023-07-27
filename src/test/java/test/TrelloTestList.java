@@ -1,7 +1,7 @@
 package test;
 
 import com.github.javafaker.Faker;
-import config.DriverConfig;
+import config.TrelloConfig;
 import io.restassured.response.Response;
 import models.CreateAndDeleteName;
 import models.PutRenameList;
@@ -25,10 +25,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TrelloTestList {
     Faker faker = new Faker();
-    private final DriverConfig config;
+    private final TrelloConfig config;
 
     public TrelloTestList() {
-        this.config = ConfigFactory.create(DriverConfig.class, System.getProperties());
+        this.config = ConfigFactory.create(TrelloConfig.class, System.getProperties());
     }
 
     @Test
