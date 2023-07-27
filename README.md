@@ -5,13 +5,13 @@
 
 <h2> :hammer_and_wrench: Cтек </h2>
 <p align="center">
-  <img width="6%" title="IDEA" src="materials/pictures/IDEA.png">
-  <img width="6%" title="Gradle" src="materials/pictures/Gradle.png">
-  <img width="6%" title="Allure Report" src="materials/pictures/Allure Report.png" >
-  <img width="6%" title="GitHub" src="materials/pictures/GitHub.png"> 
-  <img width="6%" title="Telegram" src="materials/pictures/Telegram.png">
-  <img width="6%" title="Jenkins" src="materials/pictures/Jenkins.png"> 
-  <img width="6%" title="Java" src="materials/pictures/Java.png">
+ <a href="https://www.jetbrains.com/idea/"><img width="6%" title="IDEA" src="materials/pictures/IDEA.png"></a>
+  <a href="https://gradle.org/"><img width="6%" title="Gradle" src="materials/pictures/Gradle.png"></a>
+  <a href="https://github.com/allure-framework/allure2"><img width="6%" title="Allure Report" src="materials/pictures/Allure Report.png" ></a>
+  <a href="https://github.com/"><img width="6%" title="GitHub" src="materials/pictures/GitHub.png"> </a>
+  <a href="https://telegram.org"><img width="6%" title="Telegram" src="materials/pictures/Telegram.png"></a>
+  <a href="https://www.jenkins.io/"><img width="6%" title="Jenkins" src="materials/pictures/Jenkins.png"> </a>
+  <a href="https://www.java.com/"><img width="6%" title="Java" src="materials/pictures/Java.png"></a>
 </p>
 
 ## :page_with_curl: Проверки
