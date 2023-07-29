@@ -2,6 +2,7 @@ package test;
 
 import com.github.javafaker.Faker;
 import config.TrelloConfig;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import models.CreateAndDeleteName;
 import models.PutRenameList;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.CheckListSpec.requestCheckList;
 import static specs.CheckListSpec.responseCheckListStatus200;
 import static specs.CreateCardSpec.*;
@@ -66,18 +68,21 @@ public class TrelloTestList {
         PutRenameList renameList = new PutRenameList();
         renameList.setName("Communications Developer");
 
-        PutRenameList response = step("Переименовать список", () ->
+        Response response = step("Переименовать список", () ->
                 given(requestRenameList)
-                        .cookie("token", config.token())
+                        .relaxedHTTPSValidation().cookie("token", config.token())
                         .body(renameList)
                         .when()
                         .put(id)
                         .then()
                         .spec(responseRenameList)
-                .extract().as(PutRenameList.class));
+                        .extract()
+                        .response());
+        JsonPath jsonPath = response.jsonPath();
+        String name = jsonPath.get("name");
 
-        step("Проверка переименовании", () ->{
-            assertThat(response.getName()).isEqualTo("Communications Developer");
+        step("Проверка переименовании", () -> {
+            assertThat(renameList.getName()).isEqualTo(name);
         });
     }
 
