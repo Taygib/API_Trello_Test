@@ -151,11 +151,11 @@ public class TrelloTestList {
                                 .response());
         JsonPath jsonPath = response.jsonPath();
         String name = jsonPath.get("name");
-        String List = jsonPath.get("idList");
+        String list = jsonPath.get("idList");
 
         step("Проверка создании карточки", () -> {
             assertThat(testCaseBody.getName()).isEqualTo(name);
-            assertThat(testCaseBody.getIdList()).isEqualTo(List);
+            assertThat(testCaseBody.getIdList()).isEqualTo(list);
         });
     }
 
@@ -239,11 +239,11 @@ public class TrelloTestList {
                                 .response());
         JsonPath jsonPath = response.jsonPath();
         String name = jsonPath.get("name");
-        String List = jsonPath.get("idList");
+        String list = jsonPath.get("idList");
 
         step("Проверка создании карточки", () -> {
             assertThat(testCaseBody.getName()).isEqualTo(name);
-            assertThat(testCaseBody.getIdList()).isEqualTo(List);
+            assertThat(testCaseBody.getIdList()).isEqualTo(list);
         });
     }
 }
