@@ -2,6 +2,7 @@ package test;
 
 import com.github.javafaker.Faker;
 import config.TrelloConfig;
+import io.qameta.allure.Owner;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import models.CreateAndDeleteName;
@@ -25,12 +26,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class TrelloTestList {
+
     Faker faker = new Faker();
     private static TrelloConfig config = ConfigFactory.create(TrelloConfig.class, System.getProperties());
 
     @Test
     @Tag("List")
     @Tag("Board")
+    @Owner("Taygib")
     @DisplayName("Создать лист")
     void createLists() {
 
@@ -60,6 +63,7 @@ public class TrelloTestList {
     @Test
     @Tag("Board")
     @Tag("List")
+    @Owner("Taygib")
     @DisplayName("Переименовать лист")
     void renameList() {
 
@@ -99,6 +103,7 @@ public class TrelloTestList {
     @Test
     @Tag("Board")
     @Tag("List")
+    @Owner("Taygib")
     @DisplayName("Открыть переименованный лист с статусом 200")
     void checkList() {
 
@@ -113,6 +118,7 @@ public class TrelloTestList {
     @Test
     @Tag("Card")
     @Tag("Board")
+    @Owner("Taygib")
     @DisplayName("Создать карточку в листе")
     void createCard() {
 
@@ -157,6 +163,7 @@ public class TrelloTestList {
     @Tag("Card")
     @Tag("Board")
     @Tag("deleteCard")
+    @Owner("Taygib")
     @DisplayName("Удалить карточку")
     void deleteCardInList() {
 
@@ -199,6 +206,7 @@ public class TrelloTestList {
     @Test
     @Tag("Card")
     @Tag("Board")
+    @Owner("Taygib")
     @DisplayName("Создать новую карточку в листе")
     void createNewCard() {
 
