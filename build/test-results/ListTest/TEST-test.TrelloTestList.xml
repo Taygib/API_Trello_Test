@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.TrelloTestList" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-05-21T17:03:12" hostname="LAPTOP-57D3LCEV" time="5.056">
+  <properties/>
+  <testcase name="renameList()" classname="test.TrelloTestList" time="4.298"/>
+  <testcase name="createLists()" classname="test.TrelloTestList" time="0.406"/>
+  <testcase name="checkList()" classname="test.TrelloTestList" time="0.348"/>
+  <system-out><![CDATA[646a4e2e37029a536a80f065
+Direct Usability Producer
+Request URI:	https://trello.com/1/lists/646a4e2e37029a536a80f065
+{
+    "id": "646a4e2e37029a536a80f065",
+    "name": "Regional Data Assistant",
+    "closed": false,
+    "idBoard": "645c13607c2dc8c246aa821d",
+    "pos": 1024,
+    "status": null
+}
+HTTP/1.1 200 OK
+Request URI:	https://trello.com/1/board/645c13607c2dc8c246aa821d/lists
+{
+    "id": "646a4ed5db5794316c6d0d93",
+    "name": "Regional Infrastructure Orchestrator",
+    "closed": false,
+    "idBoard": "645c13607c2dc8c246aa821d",
+    "pos": 512,
+    "status": null,
+    "limits": {
+        
+    }
+}
+HTTP/1.1 200 OK
+[
+    {
+        "id": "646a4ed5db5794316c6d0d93",
+        "name": "Regional Infrastructure Orchestrator",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 512,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "646a4e2e37029a536a80f065",
+        "name": "Regional Data Assistant",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 1024,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "646a4e17023b5514d095ab25",
+        "name": "Future Markets Director",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 2048,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "646a0d6b41803b6cb3ff0e33",
+        "name": "National Factors Planner",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 4096,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "6469ff4cfea13ea9e0d6a983",
+        "name": "Human Data Agent",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 8192,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "6466931f9fa06effc977c224",
+        "name": "National Operations Orchestrator",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 16384,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "645c13607c2dc8c246aa8225",
+        "name": "National Research Analyst",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 32768,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "645c13607c2dc8c246aa8226",
+        "name": "Готово",
+        "closed": false,
+        "idBoard": "645c13607c2dc8c246aa821d",
+        "pos": 49152,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    }
+]
+HTTP/1.1 200 OK
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

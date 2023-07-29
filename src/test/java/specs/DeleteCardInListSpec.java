@@ -15,20 +15,25 @@ public class DeleteCardInListSpec {
             .filter(withCustomTemplates())
             .baseUri("https://trello.com")
             .basePath("/1/board/");
+
     public static ResponseSpecification responseResponseForIdList = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .build();
+
     public static RequestSpecification requestResponseForIdCard = with()
             .filter(withCustomTemplates())
             .baseUri("https://trello.com")
             .basePath("/1/lists/");
+
     public static ResponseSpecification responseResponseForIdCard = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .build();
+
     public static RequestSpecification requestDeleteCardInList = with()
             .filter(withCustomTemplates())
             .baseUri("https://trello.com")
             .basePath("/1/cards/");
+
     public static ResponseSpecification responseDeleteCardInListStatus200 = new ResponseSpecBuilder()
             .log(STATUS)
             .log(BODY)

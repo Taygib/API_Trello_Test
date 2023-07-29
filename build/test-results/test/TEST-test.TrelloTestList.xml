@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test.TrelloTestList" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-07-29T14:43:39" hostname="LAPTOP-57D3LCEV" time="4.793">
+  <properties/>
+  <testcase name="Удалить карточку" classname="test.TrelloTestList" time="4.793"/>
+  <system-out><![CDATA[{
+    "limits": {
+        
+    }
+}
+HTTP/1.1 200 OK
+{
+    "limits": {
+        
+    }
+}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

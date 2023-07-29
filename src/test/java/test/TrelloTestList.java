@@ -7,13 +7,12 @@ import io.restassured.response.Response;
 import models.CreateAndDeleteName;
 import models.PutRenameList;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.CheckListSpec.requestCheckList;
 import static specs.CheckListSpec.responseCheckListStatus200;
 import static specs.CreateCardSpec.*;
@@ -32,6 +31,7 @@ public class TrelloTestList {
     @Test
     @Tag("List")
     @Tag("Board")
+    @DisplayName("Создать лист")
     void createLists() {
 
         String testCaseName = faker.name().title();
@@ -39,19 +39,28 @@ public class TrelloTestList {
         PutRenameList testCaseBody = new PutRenameList();
         testCaseBody.setName(testCaseName);
 
-        step("Создать список", () ->
-                given(requestCreateLists)
-                        .cookie("token", config.token())
-                        .body(testCaseBody)
-                        .post(config.idBoard() + "/lists")
-                        .then()
-                        .spec(responseCreateLists))
-                .body("name", is(testCaseBody.getName()));
+        Response response =
+                step("Создать список", () ->
+                        given(requestCreateLists)
+                                .cookie("token", config.token())
+                                .body(testCaseBody)
+                                .post(config.idBoard() + "/lists")
+                                .then()
+                                .spec(responseCreateLists)
+                                .extract()
+                                .response());
+        JsonPath jsonPath = response.jsonPath();
+        String name = jsonPath.get("name");
+
+        step("Проверка создании листа", () -> {
+            assertThat(testCaseBody.getName()).isEqualTo(name);
+        });
     }
 
     @Test
     @Tag("Board")
     @Tag("List")
+    @DisplayName("Переименовать лист")
     void renameList() {
 
         Response rename =
@@ -68,16 +77,17 @@ public class TrelloTestList {
         PutRenameList renameList = new PutRenameList();
         renameList.setName("Communications Developer");
 
-        Response response = step("Переименовать список", () ->
-                given(requestRenameList)
-                        .relaxedHTTPSValidation().cookie("token", config.token())
-                        .body(renameList)
-                        .when()
-                        .put(id)
-                        .then()
-                        .spec(responseRenameList)
-                        .extract()
-                        .response());
+        Response response =
+                step("Переименовать список в " + renameList.getName(), () ->
+                        given(requestRenameList)
+                                .cookie("token", config.token())
+                                .body(renameList)
+                                .when()
+                                .put(id)
+                                .then()
+                                .spec(responseRenameList)
+                                .extract()
+                                .response());
         JsonPath jsonPath = response.jsonPath();
         String name = jsonPath.get("name");
 
@@ -89,6 +99,7 @@ public class TrelloTestList {
     @Test
     @Tag("Board")
     @Tag("List")
+    @DisplayName("Открыть переименованный лист с статусом 200")
     void checkList() {
 
         step("Проверить список", () ->
@@ -102,6 +113,7 @@ public class TrelloTestList {
     @Test
     @Tag("Card")
     @Tag("Board")
+    @DisplayName("Создать карточку в листе")
     void createCard() {
 
         Response forCreate =
@@ -121,20 +133,31 @@ public class TrelloTestList {
         testCaseBody.setName(testCaseName);
         testCaseBody.setIdList(idList);
 
-        step("Создать карточку", () ->
-                given(requestCreateCard)
-                        .cookie("token", config.token())
-                        .body(testCaseBody)
-                        .post("/1/cards")
-                        .then()
-                        .spec(responseCreateCard))
-                .body("idList", is(idList));
+        Response response =
+                step("Создать карточку", () ->
+                        given(requestCreateCard)
+                                .cookie("token", config.token())
+                                .body(testCaseBody)
+                                .post("/1/cards")
+                                .then()
+                                .spec(responseCreateCard)
+                                .extract()
+                                .response());
+        JsonPath jsonPath = response.jsonPath();
+        String name = jsonPath.get("name");
+        String List = jsonPath.get("idList");
+
+        step("Проверка создании карточки", () -> {
+            assertThat(testCaseBody.getName()).isEqualTo(name);
+            assertThat(testCaseBody.getIdList()).isEqualTo(List);
+        });
     }
 
     @Test
     @Tag("Card")
     @Tag("Board")
     @Tag("deleteCard")
+    @DisplayName("Удалить карточку")
     void deleteCardInList() {
 
         Response forIdList =
@@ -176,6 +199,7 @@ public class TrelloTestList {
     @Test
     @Tag("Card")
     @Tag("Board")
+    @DisplayName("Создать новую карточку в листе")
     void createNewCard() {
 
         Response forIdList =
@@ -195,13 +219,23 @@ public class TrelloTestList {
         testCaseBody.setName(testCaseName);
         testCaseBody.setIdList(idList);
 
-        step("Создать New Карточку", () ->
-                given(requestCreateNewCard)
-                        .cookie("token", config.token())
-                        .body(testCaseBody)
-                        .post("/1/cards")
-                        .then()
-                        .spec(responseCreateNewCard))
-                .body("idList", is(idList));
+        Response response =
+                step("Создать New Карточку", () ->
+                        given(requestCreateNewCard)
+                                .cookie("token", config.token())
+                                .body(testCaseBody)
+                                .post("/1/cards")
+                                .then()
+                                .spec(responseCreateNewCard)
+                                .extract()
+                                .response());
+        JsonPath jsonPath = response.jsonPath();
+        String name = jsonPath.get("name");
+        String List = jsonPath.get("idList");
+
+        step("Проверка создании карточки", () -> {
+            assertThat(testCaseBody.getName()).isEqualTo(name);
+            assertThat(testCaseBody.getIdList()).isEqualTo(List);
+        });
     }
 }

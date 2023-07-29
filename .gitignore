@@ -5,3 +5,5 @@
 *.log
 .allure
 src/test/resources/trello.properties
+notifications/config.json
+notifications/draft.txt

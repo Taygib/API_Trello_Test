@@ -11,6 +11,7 @@ import static io.restassured.filter.log.LogDetail.STATUS;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class CheckListSpec {
+
     public static RequestSpecification requestCheckList = with()
             .filter(withCustomTemplates())
             .baseUri("https://trello.com")

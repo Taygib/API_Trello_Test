@@ -12,6 +12,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class CreateListsSpec {
+
     public static RequestSpecification requestCreateLists = with()
             .log().uri()
             .contentType(JSON)
