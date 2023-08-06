@@ -42,7 +42,7 @@ gradle clean test
 token = TOKEN
 boardID = idBoard
 ```
-## :bar_chart: Отчет о прохождении тестов в Allure и Telegram
+## :bar_chart: Пример отчета о прохождении тестов в Allure и Telegram
 
 |        <img width="5%" title="Allure Report" src="materials/pictures/Allure Report.png" > Allure <img src="materials/screens/Allure1.png?raw=true">        | <img width="5%" title="Allure Report" src="materials/pictures/Allure Report.png" > Allure<img src="materials/screens/Allure2.png?raw=true"> |
 |:-------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------:|
