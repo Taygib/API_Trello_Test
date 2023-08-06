@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TrelloTestList {
 
     Faker faker = new Faker();
-    private static TrelloConfig config = ConfigFactory.create(TrelloConfig.class, System.getProperties());
+    private static TrelloConfig trelloConfig = ConfigFactory.create(TrelloConfig.class, System.getProperties());
 
     @Test
     @Tag("List")
@@ -42,21 +42,18 @@ public class TrelloTestList {
         PutRenameList testCaseBody = new PutRenameList();
         testCaseBody.setName(testCaseName);
 
-        Response response =
+        PutRenameList response =
                 step("Создать список", () ->
                         given(requestCreateLists)
-                                .cookie("token", config.token())
+                                .cookie("token", trelloConfig.token())
                                 .body(testCaseBody)
-                                .post(config.idBoard() + "/lists")
+                                .post(trelloConfig.idBoard() + "/lists")
                                 .then()
                                 .spec(responseCreateLists)
-                                .extract()
-                                .response());
-        JsonPath jsonPath = response.jsonPath();
-        String name = jsonPath.get("name");
+                                .extract().as(PutRenameList.class));
 
         step("Проверка создании листа", () -> {
-            assertThat(testCaseBody.getName()).isEqualTo(name);
+            assertThat(testCaseBody.getName()).isEqualTo(response.getName());
         });
     }
 
@@ -70,8 +67,8 @@ public class TrelloTestList {
         Response rename =
                 step("ID для переименования списка", () ->
                         given(requestResponseRenameList)
-                                .cookie("token", config.token())
-                                .get(config.idBoard() + "/lists")
+                                .cookie("token", trelloConfig.token())
+                                .get(trelloConfig.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseRenameList)
                                 .extract()
@@ -81,22 +78,19 @@ public class TrelloTestList {
         PutRenameList renameList = new PutRenameList();
         renameList.setName("Communications Developer");
 
-        Response response =
+        PutRenameList response =
                 step("Переименовать список в " + renameList.getName(), () ->
                         given(requestRenameList)
-                                .cookie("token", config.token())
+                                .cookie("token", trelloConfig.token())
                                 .body(renameList)
                                 .when()
                                 .put(id)
                                 .then()
                                 .spec(responseRenameList)
-                                .extract()
-                                .response());
-        JsonPath jsonPath = response.jsonPath();
-        String name = jsonPath.get("name");
+                                .extract().as(PutRenameList.class));
 
         step("Проверка переименовании", () -> {
-            assertThat(renameList.getName()).isEqualTo(name);
+            assertThat(renameList.getName()).isEqualTo(response.getName());
         });
     }
 
@@ -109,8 +103,8 @@ public class TrelloTestList {
 
         step("Проверить список", () ->
                 given(requestCheckList)
-                        .cookie("token", config.token())
-                        .get(config.idBoard() + "/lists")
+                        .cookie("token", trelloConfig.token())
+                        .get(trelloConfig.idBoard() + "/lists")
                         .then()
                         .spec(responseCheckListStatus200));
     }
@@ -125,8 +119,8 @@ public class TrelloTestList {
         Response forCreate =
                 step("idList для создания карточки", () ->
                         given(requestResponseCreateCard)
-                                .cookie("token", config.token())
-                                .get(config.idBoard() + "/lists")
+                                .cookie("token", trelloConfig.token())
+                                .get(trelloConfig.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseCreateCard)
                                 .extract()
@@ -142,7 +136,7 @@ public class TrelloTestList {
         Response response =
                 step("Создать карточку", () ->
                         given(requestCreateCard)
-                                .cookie("token", config.token())
+                                .cookie("token", trelloConfig.token())
                                 .body(testCaseBody)
                                 .post("/1/cards")
                                 .then()
@@ -170,8 +164,8 @@ public class TrelloTestList {
         Response forIdList =
                 step("idList для карточки", () ->
                         given(requestResponseForIdList)
-                                .cookie("token", config.token())
-                                .get(config.idBoard() + "/lists")
+                                .cookie("token", trelloConfig.token())
+                                .get(trelloConfig.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseForIdList)
                                 .extract()
@@ -181,7 +175,7 @@ public class TrelloTestList {
         Response forIdCard =
                 step("idCard для удаления карточки", () ->
                         given(requestResponseForIdCard)
-                                .cookie("token", config.token())
+                                .cookie("token", trelloConfig.token())
                                 .get(idList + "/cards")
                                 .then()
                                 .spec(responseResponseForIdCard)
@@ -194,7 +188,7 @@ public class TrelloTestList {
 
         step("Удалить карточку", () ->
                 given(requestDeleteCardInList)
-                        .cookie("token", config.token())
+                        .cookie("token", trelloConfig.token())
                         .body(testCaseBody)
                         .delete(idCard)
                         .then()
@@ -213,8 +207,8 @@ public class TrelloTestList {
         Response forIdList =
                 step("idList для создания карточки", () ->
                         given(requestResponseCreateNewCard)
-                                .cookie("token", config.token())
-                                .get(config.idBoard() + "/lists")
+                                .cookie("token", trelloConfig.token())
+                                .get(trelloConfig.idBoard() + "/lists")
                                 .then()
                                 .spec(responseResponseCreateNewCard)
                                 .extract()
@@ -230,7 +224,7 @@ public class TrelloTestList {
         Response response =
                 step("Создать New Карточку", () ->
                         given(requestCreateNewCard)
-                                .cookie("token", config.token())
+                                .cookie("token", trelloConfig.token())
                                 .body(testCaseBody)
                                 .post("/1/cards")
                                 .then()

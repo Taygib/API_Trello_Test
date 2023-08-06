@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">6</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">4.793s</div>
+<div class="counter">8.173s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,9 +79,39 @@
 </tr>
 </thead>
 <tr>
+<td class="success">Открыть переименованный лист с статусом 200</td>
+<td class="success">checkList()</td>
+<td class="success">0.329s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Создать карточку в листе</td>
+<td class="success">createCard()</td>
+<td class="success">0.795s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Создать лист</td>
+<td class="success">createLists()</td>
+<td class="success">0.528s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Создать новую карточку в листе</td>
+<td class="success">createNewCard()</td>
+<td class="success">0.850s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">Удалить карточку</td>
 <td class="success">deleteCardInList()</td>
-<td class="success">4.793s</td>
+<td class="success">1.294s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Переименовать лист</td>
+<td class="success">renameList()</td>
+<td class="success">4.377s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -89,13 +119,290 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>{
+<pre>Request URI:	https://trello.com/1/lists/64cfb9f0310630e9499f8168
+{
+    &quot;id&quot;: &quot;64cfb9f0310630e9499f8168&quot;,
+    &quot;name&quot;: &quot;Communications Developer&quot;,
+    &quot;closed&quot;: false,
+    &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+    &quot;pos&quot;: 6656,
+    &quot;status&quot;: null
+}
+{
     &quot;limits&quot;: {
         
     }
 }
 HTTP/1.1 200 OK
 {
+    &quot;limits&quot;: {
+        
+    }
+}
+Request URI:	https://trello.com/1/board/645c13607c2dc8c246aa821d/lists
+{
+    &quot;id&quot;: &quot;64cfba319f42c1a74a7d4363&quot;,
+    &quot;name&quot;: &quot;International Directives Administrator&quot;,
+    &quot;closed&quot;: false,
+    &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+    &quot;pos&quot;: 3328,
+    &quot;status&quot;: null,
+    &quot;limits&quot;: {
+        
+    }
+}
+Request URI:	https://trello.com/1/cards
+{
+    &quot;id&quot;: &quot;64cfba3219194a3ff63836ab&quot;,
+    &quot;badges&quot;: {
+        &quot;attachmentsByType&quot;: {
+            &quot;trello&quot;: {
+                &quot;board&quot;: 0,
+                &quot;card&quot;: 0
+            }
+        },
+        &quot;location&quot;: false,
+        &quot;votes&quot;: 0,
+        &quot;viewingMemberVoted&quot;: false,
+        &quot;subscribed&quot;: false,
+        &quot;fogbugz&quot;: &quot;&quot;,
+        &quot;checkItems&quot;: 0,
+        &quot;checkItemsChecked&quot;: 0,
+        &quot;checkItemsEarliestDue&quot;: null,
+        &quot;comments&quot;: 0,
+        &quot;attachments&quot;: 0,
+        &quot;description&quot;: false,
+        &quot;due&quot;: null,
+        &quot;dueComplete&quot;: false,
+        &quot;start&quot;: null
+    },
+    &quot;checkItemStates&quot;: [
+        
+    ],
+    &quot;closed&quot;: false,
+    &quot;dueComplete&quot;: false,
+    &quot;dateLastActivity&quot;: &quot;2023-08-06T15:20:18.158Z&quot;,
+    &quot;desc&quot;: &quot;&quot;,
+    &quot;descData&quot;: {
+        &quot;emoji&quot;: {
+            
+        }
+    },
+    &quot;due&quot;: null,
+    &quot;dueReminder&quot;: null,
+    &quot;email&quot;: &quot;autoauto13+30en4vd3egwcgtwfi3f+30w7kzba9mgqocmnfzf+2qnbap0ejc@boards.trello.com&quot;,
+    &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+    &quot;idChecklists&quot;: [
+        
+    ],
+    &quot;idList&quot;: &quot;64cfba319f42c1a74a7d4363&quot;,
+    &quot;idMembers&quot;: [
+        
+    ],
+    &quot;idMembersVoted&quot;: [
+        
+    ],
+    &quot;idShort&quot;: 81,
+    &quot;idAttachmentCover&quot;: null,
+    &quot;labels&quot;: [
+        
+    ],
+    &quot;idLabels&quot;: [
+        
+    ],
+    &quot;manualCoverAttachment&quot;: false,
+    &quot;name&quot;: &quot;Dynamic Implementation Developer&quot;,
+    &quot;pos&quot;: 16384,
+    &quot;shortLink&quot;: &quot;T9K4xayW&quot;,
+    &quot;shortUrl&quot;: &quot;https://trello.com/c/T9K4xayW&quot;,
+    &quot;start&quot;: null,
+    &quot;subscribed&quot;: false,
+    &quot;url&quot;: &quot;https://trello.com/c/T9K4xayW/81-dynamic-implementation-developer&quot;,
+    &quot;cover&quot;: {
+        &quot;idAttachment&quot;: null,
+        &quot;color&quot;: null,
+        &quot;idUploadedBackground&quot;: null,
+        &quot;size&quot;: &quot;normal&quot;,
+        &quot;brightness&quot;: &quot;dark&quot;,
+        &quot;idPlugin&quot;: null
+    },
+    &quot;isTemplate&quot;: false,
+    &quot;cardRole&quot;: null,
+    &quot;attachments&quot;: [
+        
+    ],
+    &quot;stickers&quot;: [
+        
+    ],
+    &quot;limits&quot;: {
+        
+    }
+}
+[
+    {
+        &quot;id&quot;: &quot;64cfba319f42c1a74a7d4363&quot;,
+        &quot;name&quot;: &quot;International Directives Administrator&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 3328,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;64cfb9f0310630e9499f8168&quot;,
+        &quot;name&quot;: &quot;Communications Developer&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 6656,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;64cfb2926bd81b7a37b397d0&quot;,
+        &quot;name&quot;: &quot;Communications Developer&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 13312,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;64cfae7d916d1e8ccc4ba2a1&quot;,
+        &quot;name&quot;: &quot;Dynamic Mobility Analyst&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 26624,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;64cfad53b69a1f07229fe882&quot;,
+        &quot;name&quot;: &quot;Communications Developer&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 53248,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;64c4f92e030108a69c744149&quot;,
+        &quot;name&quot;: &quot;Communications Developer&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 106496,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;646a4ed5db5794316c6d0d93&quot;,
+        &quot;name&quot;: &quot;Communications Developer&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 212992,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    },
+    {
+        &quot;id&quot;: &quot;645c13607c2dc8c246aa8226&quot;,
+        &quot;name&quot;: &quot;Готово&quot;,
+        &quot;closed&quot;: false,
+        &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+        &quot;pos&quot;: 229376,
+        &quot;subscribed&quot;: false,
+        &quot;softLimit&quot;: null,
+        &quot;status&quot;: null
+    }
+]
+Request URI:	https://trello.com/1/cards
+{
+    &quot;id&quot;: &quot;64cfba3353435424a464a7f8&quot;,
+    &quot;badges&quot;: {
+        &quot;attachmentsByType&quot;: {
+            &quot;trello&quot;: {
+                &quot;board&quot;: 0,
+                &quot;card&quot;: 0
+            }
+        },
+        &quot;location&quot;: false,
+        &quot;votes&quot;: 0,
+        &quot;viewingMemberVoted&quot;: false,
+        &quot;subscribed&quot;: false,
+        &quot;fogbugz&quot;: &quot;&quot;,
+        &quot;checkItems&quot;: 0,
+        &quot;checkItemsChecked&quot;: 0,
+        &quot;checkItemsEarliestDue&quot;: null,
+        &quot;comments&quot;: 0,
+        &quot;attachments&quot;: 0,
+        &quot;description&quot;: false,
+        &quot;due&quot;: null,
+        &quot;dueComplete&quot;: false,
+        &quot;start&quot;: null
+    },
+    &quot;checkItemStates&quot;: [
+        
+    ],
+    &quot;closed&quot;: false,
+    &quot;dueComplete&quot;: false,
+    &quot;dateLastActivity&quot;: &quot;2023-08-06T15:20:19.299Z&quot;,
+    &quot;desc&quot;: &quot;&quot;,
+    &quot;descData&quot;: {
+        &quot;emoji&quot;: {
+            
+        }
+    },
+    &quot;due&quot;: null,
+    &quot;dueReminder&quot;: null,
+    &quot;email&quot;: &quot;autoauto13+30en4vd3egwcgtwfi3f+30w7kzg29cgpbds3wmw+0op5alspub@boards.trello.com&quot;,
+    &quot;idBoard&quot;: &quot;645c13607c2dc8c246aa821d&quot;,
+    &quot;idChecklists&quot;: [
+        
+    ],
+    &quot;idList&quot;: &quot;64cfba319f42c1a74a7d4363&quot;,
+    &quot;idMembers&quot;: [
+        
+    ],
+    &quot;idMembersVoted&quot;: [
+        
+    ],
+    &quot;idShort&quot;: 82,
+    &quot;idAttachmentCover&quot;: null,
+    &quot;labels&quot;: [
+        
+    ],
+    &quot;idLabels&quot;: [
+        
+    ],
+    &quot;manualCoverAttachment&quot;: false,
+    &quot;name&quot;: &quot;Internal Tactics Technician&quot;,
+    &quot;pos&quot;: 32768,
+    &quot;shortLink&quot;: &quot;dqsVJWQK&quot;,
+    &quot;shortUrl&quot;: &quot;https://trello.com/c/dqsVJWQK&quot;,
+    &quot;start&quot;: null,
+    &quot;subscribed&quot;: false,
+    &quot;url&quot;: &quot;https://trello.com/c/dqsVJWQK/82-internal-tactics-technician&quot;,
+    &quot;cover&quot;: {
+        &quot;idAttachment&quot;: null,
+        &quot;color&quot;: null,
+        &quot;idUploadedBackground&quot;: null,
+        &quot;size&quot;: &quot;normal&quot;,
+        &quot;brightness&quot;: &quot;dark&quot;,
+        &quot;idPlugin&quot;: null
+    },
+    &quot;isTemplate&quot;: false,
+    &quot;cardRole&quot;: null,
+    &quot;attachments&quot;: [
+        
+    ],
+    &quot;stickers&quot;: [
+        
+    ],
     &quot;limits&quot;: {
         
     }
@@ -111,7 +418,7 @@ HTTP/1.1 200 OK
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.5.1</a> at 29 июл. 2023 г., 17:43:44</p>
+<a href="http://www.gradle.org">Gradle 7.5.1</a> at 6 авг. 2023 г., 18:20:19</p>
 </div>
 </div>
 </body>
