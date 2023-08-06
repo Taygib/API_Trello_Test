@@ -37,7 +37,7 @@ __*Локально, из терминала:*__
 gradle clean test
 ```
 ### Фаил trello.properties
-для запуска теста локально нужно создать фаил в папке resources (src/test/resources) и необходимо указать следующее параметры
+Для запуска теста локально нужно создать фаил в папке resources (src/test/resources) и необходимо указать следующее параметры
 ```
 token = TOKEN
 boardID = idBoard

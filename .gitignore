@@ -1,9 +1,14 @@
 /.gradle
+.gradle
 /.idea
 !**/src/main/**
 !**/src/test/**
 *.log
 .allure
-src/test/resources/trello.properties
+gradlew
+gradlew.bat
+build
+/src/test/resources/selenoid.properties
 notifications/config.json
 notifications/draft.txt
+gradle/wrapper
