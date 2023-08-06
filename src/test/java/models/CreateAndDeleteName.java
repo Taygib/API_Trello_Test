@@ -3,7 +3,7 @@ package models;
 import lombok.Data;
 
 @Data
-public class CreateAndDeleteName {
-    String name;
-    String idList;
+public  class CreateAndDeleteName {
+    private String name;
+    private String idList;
 }
